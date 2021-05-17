@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Buildy
+namespace Buildy.Chain
 {
     public interface IResponsibilityHandler<in TRequest>
     {
