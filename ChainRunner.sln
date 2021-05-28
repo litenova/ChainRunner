@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buildy.Extensions.MicrosoftDependencyInjection", "src\Buildy.Extensions.MicrosoftDependencyInjection\Buildy.Extensions.MicrosoftDependencyInjection.csproj", "{E73F34A6-0291-42F6-9C1A-5DBD87AE866F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChainRunner.Extensions.MicrosoftDependencyInjection", "src\ChainRunner.Extensions.MicrosoftDependencyInjection\ChainRunner.Extensions.MicrosoftDependencyInjection.csproj", "{E73F34A6-0291-42F6-9C1A-5DBD87AE866F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buildy", "src\Buildy\Buildy.csproj", "{456C52CB-4367-4B71-9504-F1096E5D10A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChainRunner", "src\ChainRunner\ChainRunner.csproj", "{456C52CB-4367-4B71-9504-F1096E5D10A5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7EF700B1-EE63-415F-8BEA-92C00EC991E9}"
 ProjectSection(SolutionItems) = preProject
