@@ -7,6 +7,4 @@ namespace ChainRunner.Abstractions
     {
         Task HandleAsync(TRequest request, CancellationToken cancellationToken = default);
     }
-    
-    
 }
