@@ -41,7 +41,7 @@ and configure your desired as below in the `ConfigureServices` method of `Startu
 
 ## Usages
 
-Using the the class below you intend to send notifications your desired user in the form of email, SMS and Telegram message.
+Using the class below you intend to send notifications to your desired user in the form of email, SMS and Telegram message.
 
 ```c#
     public class SendNotificationRequest
@@ -81,10 +81,10 @@ For each form of notification, you create a responsibility handler.
 Setup your chain in DI container
 
 ```c#
-services.AddChain<SendNotificationRequest>()
-        .WithHandler<SendEmailHandler>()
-        .WithHandler<SendSmsHandler>()
-        .WithHandler<SendTelegramMessageHandler>();
+    services.AddChain<SendNotificationRequest>()
+            .WithHandler<SendEmailHandler>()
+            .WithHandler<SendSmsHandler>()
+            .WithHandler<SendTelegramMessageHandler>();
 ```
 
 Inject your chain to your class and run it
@@ -96,7 +96,7 @@ Inject your chain to your class and run it
     {
         private readonly IChain<ChainRequest> _chain;
 
-        public ChainController(IChain<ChainRequest> chain)
+        public NotificationController(IChain<ChainRequest> chain)
         {
             _chain = chain;
         }
