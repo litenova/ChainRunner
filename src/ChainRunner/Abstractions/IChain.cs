@@ -1,10 +1,11 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace ChainRunner.Abstractions
 {
-    public interface IChain<TRequest>
+    public interface IChain<in TRequest>
     {
-        Task HandleAsync(TRequest request, CancellationToken cancellationToken = default);
+        Task RunAsync(TRequest request, CancellationToken cancellationToken = default);
     }
 }
