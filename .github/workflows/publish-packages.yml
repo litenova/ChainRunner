@@ -1,0 +1,36 @@
+name: Publish Packages
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.100
+          
+      - name: Install Dependencies
+        run: dotnet restore
+        
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Publish ChainRunner
+        uses: brandedoutcast/publish-nuget@v2.5.5
+        with:
+          PROJECT_FILE_PATH: src/ChainRunner/ChainRunner.csproj
+          NUGET_KEY: ${{secrets.Nuget_API_Key}}
+          NUGET_SOURCE: https://api.nuget.org
+
+      - name: Publish ChainRunner.Extensions.MicrosoftDependencyInjection
+        uses: brandedoutcast/publish-nuget@v2.5.5
+        with:
+          PROJECT_FILE_PATH: src/ChainRunner.Extensions.MicrosoftDependencyInjection/ChainRunner.Extensions.MicrosoftDependencyInjection.csproj
+          NUGET_KEY: ${{secrets.Nuget_API_Key}}
+          NUGET_SOURCE: https://api.nuget.org

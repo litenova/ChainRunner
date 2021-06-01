@@ -10,6 +10,8 @@ ProjectSection(SolutionItems) = preProject
 	LICENSE = LICENSE
 	global.json = global.json
 	README.md = README.md
+	.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+	.github\workflows\publish-packages.yml = .github\workflows\publish-packages.yml
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{46F898B8-E1BF-4301-B0E5-0E69621F1E17}"
