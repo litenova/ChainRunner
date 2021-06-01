@@ -3,6 +3,18 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>ChainRunner</Title>
+        <Description>simple and innovative library to implement a chain of responsibilities</Description>
+        <PackageProjectUrl>https://github.com/litenova/ChainRunner</PackageProjectUrl>
+        <PackageIconUrl>chain_128x128.png</PackageIconUrl>
+        <RepositoryUrl>https://github.com/litenova/ChainRunner</RepositoryUrl>
+        <RepositoryType>https://github.com/litenova/ChainRunner</RepositoryType>
+        <PackageTags>chain-of-responsibilities</PackageTags>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\..\assets\logo\chain_128x128.png" Pack="true" PackagePath=""/>
+    </ItemGroup>
 
 </Project>
