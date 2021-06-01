@@ -1,23 +1,20 @@
 ﻿using System;
 using ChainRunner.Abstractions;
+using ChainRunner.Chain;
+using ChainRunner.Registry;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace ChainRunner.Extensions.MicrosoftDependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static IChainBuilder<TRequest> AddChain<TRequest>(this IServiceCollection services)
+        public static ChainConfiguration<TRequest> AddChain<TRequest>(this IServiceCollection services)
         {
-            var chainBuilder = new ChainBuilder<TRequest>(services);
+            services.TryAddSingleton(ChainRegistryAccessor.ChainRegistry);
+            services.AddTransient<IChain<TRequest>, Chain<TRequest>>();
 
-            services.AddSingleton(chainBuilder);
-            services.AddTransient(typeof(IChain<TRequest>), provider =>
-            {
-                var chainBuilder = provider.GetService(typeof(ChainBuilder<TRequest>)) as ChainBuilder<TRequest>;
-                return chainBuilder.Build(provider);
-            });
-
-            return chainBuilder;
+            return new ChainConfiguration<TRequest>(services, ChainRegistryAccessor.ChainRegistry);
         }
     }
 }

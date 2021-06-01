@@ -5,22 +5,22 @@ using System.Threading.Tasks;
 using ChainRunner.Abstractions;
 using ChainRunner.Exceptions;
 
-namespace ChainRunner.Internal
+namespace ChainRunner.Chain
 {
     public class Chain<TRequest> : IChain<TRequest>
     {
-        private readonly IEnumerable<Type> _handlerTypes;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IChainRegistry _chainRegistry;
 
-        public Chain(IServiceProvider serviceProvider, IEnumerable<Type> handlerTypes)
+        public Chain(IServiceProvider serviceProvider, IChainRegistry chainRegistry)
         {
-            _handlerTypes = handlerTypes;
             _serviceProvider = serviceProvider;
+            _chainRegistry = chainRegistry;
         }
 
         public async Task RunAsync(TRequest request, CancellationToken cancellationToken = default)
         {
-            foreach (var handlerType in _handlerTypes)
+            foreach (var handlerType in _chainRegistry.GetHandlers<TRequest>())
             {
                 var handler = _serviceProvider.GetService(handlerType) as IResponsibilityHandler<TRequest>;
 

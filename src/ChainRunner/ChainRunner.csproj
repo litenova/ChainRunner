@@ -8,10 +8,10 @@
         <Title>ChainRunner</Title>
         <Description>simple and innovative library to implement a chain of responsibilities</Description>
         <PackageProjectUrl>https://github.com/litenova/ChainRunner</PackageProjectUrl>
-        <PackageIconUrl>chain_128x128.png</PackageIconUrl>
+        <PackageIcon>chain_128x128.png</PackageIcon>
         <RepositoryUrl>https://github.com/litenova/ChainRunner</RepositoryUrl>
         <PackageTags>chain-of-responsibilities</PackageTags>
-        <Version>0.1.0</Version>
+        <Version>0.1.1</Version>
     </PropertyGroup>
 
     <ItemGroup>
