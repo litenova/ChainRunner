@@ -114,7 +114,7 @@ Inject your chain to your class and run it
 
 ### Use Without DI
 
-Inject your chain to your class and run it. You can either pass instance of a handler to `WithHandler` method or the handler should have a public empty constructor  
+You can use the `ChainBuilder<T>` class to build chains on demand. When building a chain without using DI, you should either pass the instance of handler to `WithHandler` method or the type of handler which in this case, the handler should have an empty constructuro.
 
 ```c#
     [ApiController]
