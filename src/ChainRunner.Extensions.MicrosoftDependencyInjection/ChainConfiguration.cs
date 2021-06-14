@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using ChainRunner.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ChainRunner.Extensions.MicrosoftDependencyInjection
+namespace ChainRunner
 {
     public class ChainConfiguration<TRequest>
     {

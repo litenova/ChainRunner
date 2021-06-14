@@ -1,6 +1,6 @@
 using System;
 
-namespace ChainRunner.Exceptions
+namespace ChainRunner
 {
     [Serializable]
     public class HandlerNotRegisteredException : Exception

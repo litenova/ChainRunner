@@ -1,8 +1,7 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ChainRunner.Abstractions
+namespace ChainRunner
 {
     public interface IChain<in TRequest>
     {

@@ -8,7 +8,7 @@ A simple and innovative library to implement chain of responsibilities. To learn
 * Written in .NET 5
 * No Dependencies
 * No Reflection
-* Easy to Read and Use
+* Easy to Use
 
 ## Installation
 
@@ -78,6 +78,7 @@ For each form of notification, you create a responsibility handler.
     }
 ```
 
+### Use with DI
 Setup your chain in DI container
 
 ```c#
@@ -107,6 +108,29 @@ Inject your chain to your class and run it
             await _chain.RunAsync(request);
 
             return Ok();
+        }
+    }
+```
+
+### Use Without DI
+
+Inject your chain to your class and run it. You can either pass instance of a handler to `WithHandler` method or the handler should have a public empty constructor  
+
+```c#
+    [ApiController]
+    [Route("[controller]")]
+    public class NotificationController
+    {
+        [HttpPost]
+        public async Task<IActionResult> SendNotification(SendNotificationRequest request)
+        {
+            var chain = new ChainBuilder<ChainRequest>()
+                        .WithHandler<SendEmailHandler>() // pass the handler with empty constructor
+                        .WithHandler(new SendSmsHandler()) // pass the handler instance 
+                        .WithHandler(new SendTelegramMessageHandler()) // pass the handler instance
+                        .Build();
+            
+            await chain.RunAsync(new ChainRequest());                    
         }
     }
 ```

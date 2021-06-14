@@ -1,6 +1,4 @@
-using ChainRunner.Abstractions;
-
-namespace ChainRunner.Registry
+namespace ChainRunner
 {
     public static class ChainRegistryAccessor
     {

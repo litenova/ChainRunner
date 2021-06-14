@@ -11,7 +11,7 @@
         <PackageIcon>chain_128x128.png</PackageIcon>
         <RepositoryUrl>https://github.com/litenova/ChainRunner</RepositoryUrl>
         <PackageTags>chain-of-responsibilities</PackageTags>
-        <Version>0.1.1</Version>
+        <Version>0.2.0</Version>
     </PropertyGroup>
 
     <ItemGroup>

@@ -1,9 +1,8 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using ChainRunner.Abstractions;
 
-namespace ChainRunner.WebApiSample.Chain
+namespace ChainRunner
 {
     public class ResponsibilityHandler3 : IResponsibilityHandler<ChainRequest>
     {

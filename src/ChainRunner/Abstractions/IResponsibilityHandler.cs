@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ChainRunner.Abstractions
+namespace ChainRunner
 {
     public interface IResponsibilityHandler<in TRequest>
     {

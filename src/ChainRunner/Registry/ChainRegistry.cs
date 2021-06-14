@@ -2,9 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using ChainRunner.Abstractions;
 
-namespace ChainRunner.Registry
+namespace ChainRunner
 {
     internal class ChainRegistry : IChainRegistry
     {
@@ -14,15 +13,15 @@ namespace ChainRunner.Registry
         {
             _descriptors.Add(new ResponsibilityHandlerDescriptor
             {
-                Handler = typeof(THandler),
-                Request = typeof(TRequest),
+                HandlerType = typeof(THandler),
+                RequestType = typeof(TRequest),
             });
         }
 
         public IEnumerable<Type> GetHandlers<TRequest>()
         {
-            return _descriptors.Where(p => p.Request == typeof(TRequest))
-                               .Select(p => p.Handler);
+            return _descriptors.Where(p => p.RequestType == typeof(TRequest))
+                               .Select(p => p.HandlerType);
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

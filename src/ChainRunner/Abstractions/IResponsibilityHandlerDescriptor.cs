@@ -1,13 +1,10 @@
 using System;
 
-namespace ChainRunner.Abstractions
+namespace ChainRunner
 {
     public interface IResponsibilityHandlerDescriptor
     {
-        Type Handler { get; }
-
-        Type Request { get; }
-
-        // object Instance { get; }
+        Type HandlerType { get; }
+        Type RequestType { get; }
     }
 }
