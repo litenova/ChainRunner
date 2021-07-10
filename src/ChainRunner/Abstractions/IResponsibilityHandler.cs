@@ -5,6 +5,8 @@ namespace ChainRunner
 {
     public interface IResponsibilityHandler<in TRequest>
     {
-        Task HandleAsync(TRequest request, CancellationToken cancellationToken = default);
+        Task HandleAsync(TRequest request,
+                         IChainContext chainContext,
+                         CancellationToken cancellationToken = default);
     }
 }

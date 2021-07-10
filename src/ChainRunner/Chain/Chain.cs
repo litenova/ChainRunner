@@ -33,9 +33,11 @@ namespace ChainRunner
 
         public async Task RunAsync(TRequest request, CancellationToken cancellationToken = default)
         {
+            var chainContext = new ChainContext();
+            
             foreach (var handler in _handlers)
             {
-                await handler.HandleAsync(request, cancellationToken);
+                await handler.HandleAsync(request, chainContext, cancellationToken);
             }
         }
     }
