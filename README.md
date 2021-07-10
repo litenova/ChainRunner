@@ -41,7 +41,7 @@ and configure your desired as below in the `ConfigureServices` method of `Startu
 
 ## Usages
 
-Using the class below you intend to send notifications to your desired user in the form of email, SMS and Telegram message.
+For example you have the class below which you intend to use to send notifications to your desired user in the form of email, SMS and Telegram message.
 
 ```c#
     public class SendNotificationRequest
@@ -114,7 +114,7 @@ Inject your chain to your class and run it
 
 ### Use Without DI
 
-You can use the `ChainBuilder<T>` class to build chains on demand. When building a chain without using DI, you should either pass the instance of handler to `WithHandler` method or the type of handler which in this case, the handler should have an empty constructuro.
+You can use the `ChainBuilder<T>` class to build chains without the need of DI. The `WithHandler` either accepts a handler with empty constructor or a ready instance of a handler.
 
 ```c#
     [ApiController]
