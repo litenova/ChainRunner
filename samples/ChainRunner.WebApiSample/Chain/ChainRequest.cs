@@ -1,4 +1,4 @@
-namespace ChainRunner
+namespace ChainRunner.WebApiSample.Chain
 {
     public class ChainRequest
     {

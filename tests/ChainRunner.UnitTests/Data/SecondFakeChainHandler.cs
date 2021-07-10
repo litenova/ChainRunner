@@ -5,7 +5,7 @@ namespace ChainRunner.UnitTests.Data
 {
     public class SecondFakeChainHandler : IResponsibilityHandler<FakeChainRequest>
     {
-        public Task HandleAsync(FakeChainRequest request, CancellationToken cancellationToken = default)
+        public Task HandleAsync(FakeChainRequest request, IChainContext chainContext, CancellationToken cancellationToken = default)
         {
             request.ExecutionLogs.Add("2");
             return Task.CompletedTask;

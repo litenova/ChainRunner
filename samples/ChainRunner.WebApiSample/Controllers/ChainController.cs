@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
+using ChainRunner.WebApiSample.Chain;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ChainRunner
+namespace ChainRunner.WebApiSample.Controllers
 {
     [ApiController]
     [Route("[controller]")]
