@@ -39,71 +39,75 @@ and configure your desired as below in the `ConfigureServices` method of `Startu
             .WithHandler<ResponsibilityHandler3>();
 ```
 
-## Usages
+## How to Use
 
-For example you have the class below which you intend to use to send notifications to your desired user in the form of email, SMS and Telegram message.
+Consider the following example and follow the sections in order:
+
+You intend to execute a series of actions (i.e., PersistUserData, SubscribeUserToNewsletter, SendWelcomeEmail) when a new user signs up into system.
+First, you create a class the contains all the necessary information to executes these actions. 
 
 ```c#
-    public class SendNotificationRequest
+    public class CompleteRegistrationRequest
     {
         public string UserId { get; set; }
     }
 ```
 
-For each form of notification, you create a responsibility handler.
+Then, for each action you create class that implements `IResponsibilityHandler` interface.
 
 ```c#
-    public class SendEmailHandler : IResponsibilityHandler<SendNotificationRequest>
+    public class PersistUserDataHandler : IResponsibilityHandler<CompleteRegistrationRequest>
     {
         public Task HandleAsync(SendNotificationRequest request, CancellationToken cancellationToken = default)
         {
-            // send notification using email
+            // implementation goes here ...
         }
     }
     
-    public class SendSmsHandler : IResponsibilityHandler<SendNotificationRequest>
+    public class SubscribeUserToNewsletterHandler : IResponsibilityHandler<CompleteRegistrationRequest>
     {
         public Task HandleAsync(SendNotificationRequest request, CancellationToken cancellationToken = default)
         {
-            // send notification using sms
+            // implementation goes here ...
         }
     }
     
-    public class SendTelegramMessageHandler : IResponsibilityHandler<SendNotificationRequest>
+    public class SendWelcomeEmailHandler : IResponsibilityHandler<CompleteRegistrationRequest>
     {
         public Task HandleAsync(SendNotificationRequest request, CancellationToken cancellationToken = default)
         {
-            // send notification using Telegram message
+            // implementation goes here ...
         }
     }
 ```
 
-### Use with DI
-Setup your chain in DI container
+### Setup Pre-Defined Chain with Dependency Injection Support
+
+Setup your chain in the `ConfigureServices` method of `Startup.cs`
 
 ```c#
-    services.AddChain<SendNotificationRequest>()
-            .WithHandler<SendEmailHandler>()
-            .WithHandler<SendSmsHandler>()
-            .WithHandler<SendTelegramMessageHandler>();
+    services.AddChain<CompleteRegistrationRequest>()
+            .WithHandler<PersistUserDataHandler>()
+            .WithHandler<SubscribeUserToNewsletterHandler>()
+            .WithHandler<SendWelcomeEmailHandler>();
 ```
 
-Inject your chain to your class and run it
+Inject your chain to your desired class and run it
 
 ```c#
     [ApiController]
     [Route("[controller]")]
-    public class NotificationController
+    public class Controller
     {
-        private readonly IChain<ChainRequest> _chain;
+        private readonly IChain<CompleteRegistrationRequest> _chain;
 
-        public NotificationController(IChain<ChainRequest> chain)
+        public Controller(IChain<CompleteRegistrationRequest> chain)
         {
             _chain = chain;
         }
 
         [HttpPost]
-        public async Task<IActionResult> SendNotification(SendNotificationRequest request)
+        public async Task<IActionResult> Register(CompleteRegistrationRequest request)
         {
             await _chain.RunAsync(request);
 
@@ -112,25 +116,65 @@ Inject your chain to your class and run it
     }
 ```
 
-### Use Without DI
+### Setup Chain on Demand with Dependency Injection Support
 
-You can use the `ChainBuilder<T>` class to build chains without the need of DI. The `WithHandler` either accepts a handler with empty constructor or a ready instance of a handler.
+Inject `IChainBuilder` to your desired class and setup you chain.
 
 ```c#
     [ApiController]
     [Route("[controller]")]
-    public class NotificationController
+    public class Controller
+    {
+        private readonly IChainBuilder _chainBuilder;
+
+        public Controller(IChainBuilder chainBuilder)
+        {
+            _chainBuilder = chainBuilder;
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> Register(CompleteRegistrationRequest request)
+        {
+            var chain = _chainBuilder.For<CompleteRegistrationRequest>()
+                                     .WithHandler<PersistUserDataHandler>()
+                                     .WithHandler<SubscribeUserToNewsletterHandler>()
+                                     .WithHandler<SendWelcomeEmailHandler>()
+                                     .Build();
+
+            await chain.RunAsync(request);                 
+        }
+    }    
+```
+Before using `IChainBuilder`, make sure to call `AddChainRunner(assemblies)` method in `ConfigureServices()` of `Startup.cs` class to register `IChainBuilder` and handlers.
+
+```c#
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddChainRunner(typeof(PersistUserDataHandler).Assembly);
+    }
+```
+
+### Setup Chain on Demand Without Dependency Injection Support
+
+You can use the `ChainBuilder<T>` class to build chains without the need of DI. The `WithHandler()` method either accepts a handler with empty constructor or a pre-initialized instance of a handler.
+
+```c#
+    [ApiController]
+    [Route("[controller]")]
+    public class Controller
     {
         [HttpPost]
-        public async Task<IActionResult> SendNotification(SendNotificationRequest request)
+        public async Task<IActionResult> Register(CompleteRegistrationRequest request)
         {
-            var chain = new ChainBuilder<ChainRequest>()
-                        .WithHandler<SendEmailHandler>() // pass the handler with empty constructor
-                        .WithHandler(new SendSmsHandler()) // pass the handler instance 
-                        .WithHandler(new SendTelegramMessageHandler()) // pass the handler instance
-                        .Build();
+        
+            var chain = ChainBuilder.For<CompleteRegistrationRequest>()
+                                    .WithHandler<PersistUserDataHandler>() // pass the handler with empty constructor
+                                    .WithHandler<SubscribeUserToNewsletterHandler>() // pass the handler with empty constructor
+                                    .WithHandler(new SendWelcomeEmailHandler()) // pass the handler instance 
+                                    .Build();              
             
-            await chain.RunAsync(new ChainRequest());                    
+            await chain.RunAsync(request);                    
         }
     }
 ```
+

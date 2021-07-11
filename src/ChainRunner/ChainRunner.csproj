@@ -11,11 +11,17 @@
         <PackageIcon>chain_128x128.png</PackageIcon>
         <RepositoryUrl>https://github.com/litenova/ChainRunner</RepositoryUrl>
         <PackageTags>chain-of-responsibilities</PackageTags>
-        <Version>0.3.0</Version>
+        <Version>0.4.0</Version>
     </PropertyGroup>
 
     <ItemGroup>
         <None Include="..\..\assets\logo\chain_128x128.png" Pack="true" PackagePath="" />
     </ItemGroup>
 
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>ChainRunner.Extensions.MicrosoftDependencyInjection</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+    
 </Project>

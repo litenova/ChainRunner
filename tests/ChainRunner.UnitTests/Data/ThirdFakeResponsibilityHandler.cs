@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace ChainRunner.UnitTests.Data
 {
-    public class ThirdFakeChainHandler : IResponsibilityHandler<FakeChainRequest>
+    public class ThirdFakeResponsibilityHandler : IResponsibilityHandler<FakeChainRequest>
     {
         public Task HandleAsync(FakeChainRequest request,
                                 IChainContext chainContext,
