@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ChainRunner
 {
-    public class ChainDataCollection : IChainDataCollection
+    internal class ChainDataCollection : IChainDataCollection
     {
         private readonly Dictionary<string, object> _data = new();
 

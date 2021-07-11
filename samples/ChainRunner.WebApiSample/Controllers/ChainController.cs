@@ -9,29 +9,45 @@ namespace ChainRunner.WebApiSample.Controllers
     public class ChainController : ControllerBase
     {
         private readonly IChain<ChainRequest> _chain;
+        private readonly IChainBuilder _chainBuilder;
 
-        public ChainController(IChain<ChainRequest> chain)
+        public ChainController(IChain<ChainRequest> chain, IChainBuilder chainBuilder)
         {
             _chain = chain;
+            _chainBuilder = chainBuilder;
         }
 
-        [HttpGet("run-sample-chain")]
+        [HttpGet("run-predefined-chain")]
         public async Task<IActionResult> RunChain()
         {
             await _chain.RunAsync(new ChainRequest());
 
             return Ok();
         }
-        
-        [HttpGet("run-sample-chain-2")]
+
+        [HttpGet("run-chain-built-on-demand")]
         public async Task<IActionResult> RunChain2()
         {
-            var chain = new ChainBuilder<ChainRequest>()
-                        .WithHandler<ResponsibilityHandler1>()
-                        .WithHandler<ResponsibilityHandler2>()
-                        .WithHandler<ResponsibilityHandler3>()
-                        .Build();
-            
+            var chain = ChainBuilder.For<ChainRequest>()
+                                    .WithHandler<ResponsibilityHandler1>()
+                                    .WithHandler<ResponsibilityHandler2>()
+                                    .WithHandler<ResponsibilityHandler3>()
+                                    .Build();
+
+            await chain.RunAsync(new ChainRequest());
+
+            return Ok();
+        }
+
+        [HttpGet("run-chain-built-on-demand-with-di-support")]
+        public async Task<IActionResult> RunChain3()
+        {
+            var chain = _chainBuilder.For<ChainRequest>()
+                                     .WithHandler<ResponsibilityHandler1>()
+                                     .WithHandler<ResponsibilityHandler2>()
+                                     .WithHandler<ResponsibilityHandler3>()
+                                     .Build();
+
             await chain.RunAsync(new ChainRequest());
 
             return Ok();

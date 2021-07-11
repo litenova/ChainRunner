@@ -25,7 +25,7 @@ namespace ChainRunner.UnitTests
             // Assert
             var chainServiceDescriptor = services
                 .SingleOrDefault(sd => sd.ServiceType == typeof(IChain<FakeChainRequest>));
-            chainServiceDescriptor.Lifetime.Should().Be(ServiceLifetime.Transient);
+            chainServiceDescriptor.Lifetime.Should().Be(ServiceLifetime.Singleton);
 
             var handlerDescriptors = 
                 services.Where(sd => sd.ServiceType.IsAssignableTo(typeof(IResponsibilityHandler<FakeChainRequest>)));
@@ -39,13 +39,13 @@ namespace ChainRunner.UnitTests
         }
         
         [Fact]
-        public void AddResponsibilityHandlers_should_add_handlers_to_service_collection()
+        public void AddChainRunner_should_add_handlers_to_service_collection()
         {
             // Arrange
             IServiceCollection services = new ServiceCollection();
 
             // Act
-            services.AddResponsibilityHandlers(typeof(FirstFakeResponsibilityHandler).Assembly);
+            services.AddChainRunner(typeof(FirstFakeResponsibilityHandler).Assembly);
 
             // Assert
             services.Should().ContainSingle(d => d.ImplementationType == typeof(FirstFakeResponsibilityHandler));

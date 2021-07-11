@@ -23,7 +23,7 @@ namespace ChainRunner
             {
                 var handler = provider.GetService<THandler>() ?? throw new InvalidOperationException();
                                        
-                return new Lazy<THandler>(handler);
+                return new Lazy<IResponsibilityHandler<TRequest>>(handler);
             });
 
             return this;
