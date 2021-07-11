@@ -11,16 +11,16 @@ namespace ChainRunner.UnitTests
     public class ServiceCollectionTests
     {
         [Fact]
-        public void required_should_be_added_to_service_collection()
+        public void AddChain_should_add_required_services_to_service_collection()
         {
             // Arrange
             IServiceCollection services = new ServiceCollection();
 
             // Act
             services.AddChain<FakeChainRequest>()
-                    .WithHandler<FirstFakeChainHandler>()
-                    .WithHandler<SecondFakeChainHandler>()
-                    .WithHandler<ThirdFakeChainHandler>();
+                    .WithHandler<FirstFakeResponsibilityHandler>()
+                    .WithHandler<SecondFakeResponsibilityHandler>()
+                    .WithHandler<ThirdFakeResponsibilityHandler>();
 
             // Assert
             var chainServiceDescriptor = services
@@ -36,6 +36,21 @@ namespace ChainRunner.UnitTests
             {
                 handlerDescriptor.Lifetime.Should().Be(ServiceLifetime.Transient);
             }
+        }
+        
+        [Fact]
+        public void AddResponsibilityHandlers_should_add_handlers_to_service_collection()
+        {
+            // Arrange
+            IServiceCollection services = new ServiceCollection();
+
+            // Act
+            services.AddResponsibilityHandlers(typeof(FirstFakeResponsibilityHandler).Assembly);
+
+            // Assert
+            services.Should().ContainSingle(d => d.ImplementationType == typeof(FirstFakeResponsibilityHandler));
+            services.Should().ContainSingle(d => d.ImplementationType == typeof(SecondFakeResponsibilityHandler));
+            services.Should().ContainSingle(d => d.ImplementationType == typeof(ThirdFakeResponsibilityHandler));
         }
     }
 }

@@ -12,9 +12,9 @@ namespace ChainRunner.UnitTests
         {
             // Arrange
             var chain = new ChainBuilder<FakeChainRequest>()
-                        .WithHandler<FirstFakeChainHandler>()
-                        .WithHandler<SecondFakeChainHandler>()
-                        .WithHandler<ThirdFakeChainHandler>()
+                        .WithHandler<FirstFakeResponsibilityHandler>()
+                        .WithHandler<SecondFakeResponsibilityHandler>()
+                        .WithHandler<ThirdFakeResponsibilityHandler>()
                         .Build();
 
             var request = new FakeChainRequest();

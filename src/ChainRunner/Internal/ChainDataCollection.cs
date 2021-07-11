@@ -4,21 +4,17 @@ using System.Collections.Generic;
 
 namespace ChainRunner
 {
-    internal class ChainContext : IChainContext
+    public class ChainDataCollection : IChainDataCollection
     {
         private readonly Dictionary<string, object> _data = new();
-
-        public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => _data.GetEnumerator();
-        
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public TItem? Get<TItem>(string key)
         {
             if (_data.ContainsKey(key))
             {
-                return (TItem)_data[key];
+                return (TItem) _data[key];
             }
-            
+
             return default;
         }
 
@@ -26,5 +22,7 @@ namespace ChainRunner
         {
             _data[key] = instance ?? throw new ArgumentNullException(nameof(instance));
         }
+
+        public bool ContainsKey(string key) => _data.ContainsKey(key);
     }
 }

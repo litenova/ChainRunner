@@ -18,4 +18,10 @@
         <None Include="..\..\assets\logo\chain_128x128.png" Pack="true" PackagePath="" />
     </ItemGroup>
 
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>ChainRunner.Extensions.MicrosoftDependencyInjection</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+    
 </Project>
