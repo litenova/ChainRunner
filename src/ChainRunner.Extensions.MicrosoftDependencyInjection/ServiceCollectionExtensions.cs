@@ -15,16 +15,9 @@ namespace ChainRunner
         /// <returns>the chain configuration</returns>
         public static ChainConfiguration<TRequest> AddChain<TRequest>(this IServiceCollection services)
         {
-            LazyHandlerRegistry<TRequest> registry = new();
+            HandlerRegistry<TRequest> registry = new();
 
-            services.AddSingleton<IChain<TRequest>>(sp =>
-            {
-                var handlers = registry
-                               .Select(sp.GetService)
-                               .Cast<Lazy<IResponsibilityHandler<TRequest>>>();
-
-                return new LazyChain<TRequest>(handlers);
-            });
+            services.AddSingleton<IChain<TRequest>>(sp => new LazyChain<TRequest>(sp, registry));
 
             return new ChainConfiguration<TRequest>(services, registry);
         }
@@ -39,18 +32,13 @@ namespace ChainRunner
                                                         params Assembly[] assemblies)
         {
             services.AddTransient<IChainBuilder, LazyChainBuilder>();
-            
-            foreach (var typeInfo in assemblies.SelectMany(a => a.DefinedTypes))
+
+            var handlerTypes = assemblies.SelectMany(a => a.DefinedTypes)
+                                         .Where(t => t.ImplementedInterfaces.Contains(typeof(IResponsibilityHandler)));
+
+            foreach (var typeInfo in handlerTypes)
             {
-                foreach (var @interface in typeInfo.ImplementedInterfaces)
-                {
-                    if (@interface.IsGenericType &&
-                        @interface.GetGenericTypeDefinition() == typeof(IResponsibilityHandler<>))
-                    {
-                        services.TryAddTransient(typeInfo);
-                        break;
-                    }
-                }
+                services.TryAddTransient(typeInfo);
             }
 
             return services;

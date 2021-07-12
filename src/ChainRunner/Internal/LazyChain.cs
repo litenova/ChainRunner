@@ -7,20 +7,27 @@ namespace ChainRunner
 {
     internal class LazyChain<TRequest> : IChain<TRequest>
     {
-        private readonly IEnumerable<Lazy<IResponsibilityHandler<TRequest>>> _handlers;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IEnumerable<Type> _handlerTypes;
 
-        public LazyChain(IEnumerable<Lazy<IResponsibilityHandler<TRequest>>> handlers)
+        public LazyChain(IServiceProvider serviceProvider,
+                         IEnumerable<Type> handlerTypes)
         {
-            _handlers = handlers;
+            _serviceProvider = serviceProvider;
+            _handlerTypes = handlerTypes;
         }
 
         public async Task RunAsync(TRequest request, CancellationToken cancellationToken = default)
         {
             var chainContext = new ChainContext();
-            
-            foreach (var handler in _handlers)
+
+            foreach (var handlerType in _handlerTypes)
             {
-                await handler.Value.HandleAsync(request, chainContext, cancellationToken);
+                var handler = _serviceProvider.GetService(handlerType) as IResponsibilityHandler<TRequest>;
+
+                if (handler is null) throw new HandlerNotRegisteredException(handlerType);
+
+                await handler.HandleAsync(request, chainContext, cancellationToken);
             }
         }
     }

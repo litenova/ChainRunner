@@ -28,7 +28,8 @@ namespace ChainRunner.WebApiSample
                                  {Title = "ChainRunner.WebApiSample", Version = "v1"});
             });
 
-            services.AddChainRunner();
+            services.AddChainRunner(typeof(ResponsibilityHandler1).Assembly);
+            
             services.AddChain<ChainRequest>()
                     .WithHandler<ResponsibilityHandler1>()
                     .WithHandler<ResponsibilityHandler2>()

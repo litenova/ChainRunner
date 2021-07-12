@@ -3,7 +3,12 @@ using System.Threading.Tasks;
 
 namespace ChainRunner
 {
-    public interface IResponsibilityHandler<in TRequest>
+    public interface IResponsibilityHandler
+    {
+        
+    }
+    
+    public interface IResponsibilityHandler<in TRequest> : IResponsibilityHandler
     {
         Task HandleAsync(TRequest request,
                          IChainContext chainContext,

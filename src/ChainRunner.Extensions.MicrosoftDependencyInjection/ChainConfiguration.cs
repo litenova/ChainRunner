@@ -7,24 +7,18 @@ namespace ChainRunner
     public class ChainConfiguration<TRequest>
     {
         private readonly IServiceCollection _services;
-        private readonly LazyHandlerRegistry<TRequest> _lazyHandlerRegistry;
+        private readonly HandlerRegistry<TRequest> _handlerRegistry;
 
-        internal ChainConfiguration(IServiceCollection services, LazyHandlerRegistry<TRequest> lazyHandlerRegistry)
+        internal ChainConfiguration(IServiceCollection services, HandlerRegistry<TRequest> handlerRegistry)
         {
             _services = services;
-            _lazyHandlerRegistry = lazyHandlerRegistry;
+            _handlerRegistry = handlerRegistry;
         }
 
         public ChainConfiguration<TRequest> WithHandler<THandler>() where THandler : IResponsibilityHandler<TRequest>
         {
-            _lazyHandlerRegistry.Register<THandler>();
+            _handlerRegistry.Register<THandler>();
             _services.TryAddTransient(typeof(THandler));
-            _services.TryAddTransient(typeof(Lazy<THandler>), provider =>
-            {
-                var handler = provider.GetService<THandler>() ?? throw new InvalidOperationException();
-                                       
-                return new Lazy<IResponsibilityHandler<TRequest>>(handler);
-            });
 
             return this;
         }

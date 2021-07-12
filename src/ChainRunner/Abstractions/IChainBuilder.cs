@@ -12,9 +12,6 @@ namespace ChainRunner
     {
         IChainBuilder<TRequest> WithHandler<THandler>() where THandler : IResponsibilityHandler<TRequest>;
 
-        IChainBuilder<TRequest> WithHandler<THandler>(THandler instance)
-            where THandler : IResponsibilityHandler<TRequest>;
-
         IChain<TRequest> Build();
     }
 }

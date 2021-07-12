@@ -4,16 +4,17 @@ using System.Collections.Generic;
 
 namespace ChainRunner
 {
-    public class LazyHandlerRegistry<TRequest> : IEnumerable<Type>
+    public class HandlerRegistry<TRequest> : IEnumerable<Type>
     {
-        private readonly HashSet<Type> _lazyHandlerTypes = new();
+        private readonly HashSet<Type> _handlerTypes = new();
 
-        public IEnumerator<Type> GetEnumerator() => _lazyHandlerTypes.GetEnumerator();
+        public IEnumerator<Type> GetEnumerator() => _handlerTypes.GetEnumerator();
+
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public void Register<THandler>() where THandler : IResponsibilityHandler<TRequest>
         {
-            _lazyHandlerTypes.Add(typeof(Lazy<THandler>));
+            _handlerTypes.Add(typeof(THandler));
         }
     }
 }
