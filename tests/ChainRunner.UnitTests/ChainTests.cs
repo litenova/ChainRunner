@@ -3,29 +3,28 @@ using ChainRunner.UnitTests.Data;
 using FluentAssertions;
 using Xunit;
 
-namespace ChainRunner.UnitTests
+namespace ChainRunner.UnitTests;
+
+public class ChainTests 
 {
-    public class ChainTests 
+    [Fact]
+    public async Task chain_should_call_handlers_in_orders()
     {
-        [Fact]
-        public async Task chain_should_call_handlers_in_orders()
-        {
-            // Arrange
-            var chain = new ChainBuilder<FakeChainRequest>()
-                        .WithHandler<FirstFakeResponsibilityHandler>()
-                        .WithHandler<SecondFakeResponsibilityHandler>()
-                        .WithHandler<ThirdFakeResponsibilityHandler>()
-                        .Build();
+        // Arrange
+        var chain = new ChainBuilder<FakeChainRequest>()
+                    .WithHandler<FirstFakeResponsibilityHandler>()
+                    .WithHandler<SecondFakeResponsibilityHandler>()
+                    .WithHandler<ThirdFakeResponsibilityHandler>()
+                    .Build();
 
-            var request = new FakeChainRequest();
+        var request = new FakeChainRequest();
 
-            // Act
-            await chain.RunAsync(request);
+        // Act
+        await chain.RunAsync(request);
             
-            // Assert
-            request.ExecutionLogs.Should().HaveElementAt(0, "1");
-            request.ExecutionLogs.Should().HaveElementAt(1, "2");
-            request.ExecutionLogs.Should().HaveElementAt(2, "3");
-        }
+        // Assert
+        request.ExecutionLogs.Should().HaveElementAt(0, "1");
+        request.ExecutionLogs.Should().HaveElementAt(1, "2");
+        request.ExecutionLogs.Should().HaveElementAt(2, "3");
     }
 }

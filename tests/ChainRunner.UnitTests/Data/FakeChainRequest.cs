@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 
-namespace ChainRunner.UnitTests.Data
+namespace ChainRunner.UnitTests.Data;
+
+public class FakeChainRequest
 {
-    public class FakeChainRequest
-    {
-        public List<string> ExecutionLogs { get; set; } = new List<string>();
-    }
+    public List<string> ExecutionLogs { get; set; } = new List<string>();
 }

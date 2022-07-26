@@ -1,16 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+namespace ChainRunner.Internal;
 
-namespace ChainRunner
+internal class ChainContext : IChainContext
 {
-    internal class ChainContext : IChainContext
+    public ChainContext()
     {
-        public ChainContext()
-        {
-            Data = new ChainDataCollection();
-        }
-
-        public IChainDataCollection Data { get; }
+        Data = new ChainDataCollection();
     }
+
+    public IChainDataCollection Data { get; }
 }

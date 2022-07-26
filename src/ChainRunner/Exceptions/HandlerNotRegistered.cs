@@ -1,13 +1,12 @@
 using System;
 
-namespace ChainRunner
+namespace ChainRunner;
+
+[Serializable]
+public class HandlerNotRegisteredException : Exception
 {
-    [Serializable]
-    public class HandlerNotRegisteredException : Exception
+    public HandlerNotRegisteredException(Type handlerType) : base($"handler of type '{handlerType}' is not registered")
     {
-        public HandlerNotRegisteredException(Type handlerType) : base($"handler of type '{handlerType}' is not registered")
-        {
             
-        }
     }
 }

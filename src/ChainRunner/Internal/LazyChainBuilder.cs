@@ -1,43 +1,42 @@
 using System;
 using System.Collections.Generic;
 
-namespace ChainRunner
+namespace ChainRunner.Internal;
+
+internal class LazyChainBuilder : IChainBuilder
 {
-    internal class LazyChainBuilder : IChainBuilder
+    private readonly IServiceProvider _serviceProvider;
+
+    public LazyChainBuilder(IServiceProvider serviceProvider)
     {
-        private readonly IServiceProvider _serviceProvider;
-
-        public LazyChainBuilder(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
-
-        public IChainBuilder<TRequest> For<TRequest>()
-        {
-            return new LazyChainBuilder<TRequest>(_serviceProvider);
-        }
+        _serviceProvider = serviceProvider;
     }
 
-    internal class LazyChainBuilder<TRequest> : IChainBuilder<TRequest>
+    public IChainBuilder<TRequest> For<TRequest>()
     {
-        private readonly IServiceProvider _serviceProvider;
-        private readonly HashSet<Type> _handlerTypes = new();
+        return new LazyChainBuilder<TRequest>(_serviceProvider);
+    }
+}
 
-        public LazyChainBuilder(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
+internal class LazyChainBuilder<TRequest> : IChainBuilder<TRequest>
+{
+    private readonly IServiceProvider _serviceProvider;
+    private readonly HashSet<Type> _handlerTypes = new();
 
-        public IChainBuilder<TRequest> WithHandler<THandler>() where THandler : IResponsibilityHandler<TRequest>
-        {
-            _handlerTypes.Add(typeof(THandler));
+    public LazyChainBuilder(IServiceProvider serviceProvider)
+    {
+        _serviceProvider = serviceProvider;
+    }
 
-            return this;
-        }
+    public IChainBuilder<TRequest> WithHandler<THandler>() where THandler : IResponsibilityHandler<TRequest>
+    {
+        _handlerTypes.Add(typeof(THandler));
 
-        public IChain<TRequest> Build()
-        {
-            return new LazyChain<TRequest>(_serviceProvider, _handlerTypes);
-        }
+        return this;
+    }
+
+    public IChain<TRequest> Build()
+    {
+        return new LazyChain<TRequest>(_serviceProvider, _handlerTypes);
     }
 }

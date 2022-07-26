@@ -1,17 +1,16 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ChainRunner
+namespace ChainRunner;
+
+public interface IResponsibilityHandler
 {
-    public interface IResponsibilityHandler
-    {
         
-    }
+}
     
-    public interface IResponsibilityHandler<in TRequest> : IResponsibilityHandler
-    {
-        Task HandleAsync(TRequest request,
-                         IChainContext chainContext,
-                         CancellationToken cancellationToken = default);
-    }
+public interface IResponsibilityHandler<in TRequest> : IResponsibilityHandler
+{
+    Task HandleAsync(TRequest request,
+                     IChainContext chainContext,
+                     CancellationToken cancellationToken = default);
 }

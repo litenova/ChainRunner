@@ -3,32 +3,31 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ChainRunner
+namespace ChainRunner.Internal;
+
+internal class LazyChain<TRequest> : IChain<TRequest>
 {
-    internal class LazyChain<TRequest> : IChain<TRequest>
+    private readonly IServiceProvider _serviceProvider;
+    private readonly IEnumerable<Type> _handlerTypes;
+
+    public LazyChain(IServiceProvider serviceProvider,
+                     IEnumerable<Type> handlerTypes)
     {
-        private readonly IServiceProvider _serviceProvider;
-        private readonly IEnumerable<Type> _handlerTypes;
+        _serviceProvider = serviceProvider;
+        _handlerTypes = handlerTypes;
+    }
 
-        public LazyChain(IServiceProvider serviceProvider,
-                         IEnumerable<Type> handlerTypes)
+    public async Task RunAsync(TRequest request, CancellationToken cancellationToken = default)
+    {
+        var chainContext = new ChainContext();
+
+        foreach (var handlerType in _handlerTypes)
         {
-            _serviceProvider = serviceProvider;
-            _handlerTypes = handlerTypes;
-        }
+            var handler = _serviceProvider.GetService(handlerType) as IResponsibilityHandler<TRequest>;
 
-        public async Task RunAsync(TRequest request, CancellationToken cancellationToken = default)
-        {
-            var chainContext = new ChainContext();
+            if (handler is null) throw new HandlerNotRegisteredException(handlerType);
 
-            foreach (var handlerType in _handlerTypes)
-            {
-                var handler = _serviceProvider.GetService(handlerType) as IResponsibilityHandler<TRequest>;
-
-                if (handler is null) throw new HandlerNotRegisteredException(handlerType);
-
-                await handler.HandleAsync(request, chainContext, cancellationToken);
-            }
+            await handler.HandleAsync(request, chainContext, cancellationToken);
         }
     }
 }

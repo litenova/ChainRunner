@@ -12,6 +12,8 @@ ProjectSection(SolutionItems) = preProject
 	README.md = README.md
 	.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 	.github\workflows\publish-packages.yml = .github\workflows\publish-packages.yml
+	Directory.Build.props = Directory.Build.props
+	Release-Notes.txt = Release-Notes.txt
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{46F898B8-E1BF-4301-B0E5-0E69621F1E17}"
@@ -23,6 +25,21 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0B8C7C12-D6C1-424E-A35A-B4ECA6D614C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChainRunner.UnitTests", "tests\ChainRunner.UnitTests\ChainRunner.UnitTests.csproj", "{D5953B07-6CC2-454A-A0CE-F3B41FF5351B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{2F6AE607-2F1B-4603-AFB7-CB08684F55D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logo", "logo", "{1A0089A7-0BE3-4E0D-84E1-E6B249F788E7}"
+	ProjectSection(SolutionItems) = preProject
+		assets\logo\chain_128x128.png = assets\logo\chain_128x128.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{73110182-D695-4AD9-9366-CBDA2DF597AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{D254CA47-786C-41EF-885A-FC1660DC3ED6}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\publish.yml = .github\workflows\publish.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,5 +69,7 @@ Global
 		{E73F34A6-0291-42F6-9C1A-5DBD87AE866F} = {46F898B8-E1BF-4301-B0E5-0E69621F1E17}
 		{0AFA9CD9-0658-45E2-A2C2-F5729C547AF8} = {6F22BEE3-CB9B-49FB-BEFF-11D838E6A25C}
 		{D5953B07-6CC2-454A-A0CE-F3B41FF5351B} = {0B8C7C12-D6C1-424E-A35A-B4ECA6D614C9}
+		{1A0089A7-0BE3-4E0D-84E1-E6B249F788E7} = {2F6AE607-2F1B-4603-AFB7-CB08684F55D2}
+		{D254CA47-786C-41EF-885A-FC1660DC3ED6} = {73110182-D695-4AD9-9366-CBDA2DF597AD}
 	EndGlobalSection
 EndGlobal

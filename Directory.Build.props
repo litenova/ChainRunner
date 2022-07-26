@@ -1,0 +1,27 @@
+<Project>
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Authors>Mohammad Shafie-Zadeh</Authors>
+        <PackageTags>chain-of-responsibilities</PackageTags>
+        <VersionPrefix>0.5.0</VersionPrefix>
+        <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(SolutionDir)\Release-Notes.txt"))</PackageReleaseNotes>
+        <PackageIcon>chain_128x128.png</PackageIcon>
+        <Description>simple and innovative library to implement a chain of responsibilities</Description>
+        <PackageProjectUrl>https://github.com/litenova/ChainRunner</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/litenova/ChainRunner</RepositoryUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Nullable>enable</Nullable>
+        <RootNamespace>ChainRunner</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\..\assets\logo\chain_128x128.png" Pack="true" PackagePath=""/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="ChainRunner.UnitTests"/>
+    </ItemGroup>
+
+</Project>

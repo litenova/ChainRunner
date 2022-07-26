@@ -1,29 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Authors>Mohammad ShafieZadeh</Authors>
-        <Title>ChainRunner</Title>
-        <Description>simple and innovative library to implement a chain of responsibilities</Description>
-        <PackageProjectUrl>https://github.com/litenova/ChainRunner</PackageProjectUrl>
-        <PackageIcon>chain_128x128.png</PackageIcon>
-        <RepositoryUrl>https://github.com/litenova/ChainRunner</RepositoryUrl>
-        <PackageTags>chain-of-responsibilities</PackageTags>
-        <Version>0.4.1</Version>
-    </PropertyGroup>
-
     <ItemGroup>
-        <None Include="..\..\assets\logo\chain_128x128.png" Pack="true" PackagePath="" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\ChainRunner\ChainRunner.csproj" />
+        <ProjectReference Include="..\ChainRunner\ChainRunner.csproj"/>
     </ItemGroup>
 
 </Project>
