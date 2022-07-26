@@ -1,5 +1,5 @@
 # ChainRunner
-[![.NET 5 CI](https://github.com/litenova/ChainRunner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/litenova/ChainRunner/actions/workflows/dotnet.yml)
+[![Build](https://github.com/litenova/ChainRunner/actions/workflows/build.yml/badge.svg)](https://github.com/litenova/ChainRunner/actions/workflows/build.yml)
 [![NuGet](https://img.shields.io/nuget/vpre/ChainRunner.svg)](https://www.nuget.org/packages/ChainRunner)
 
 
