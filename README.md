@@ -1,5 +1,6 @@
 # ChainRunner
 [![Build](https://github.com/litenova/ChainRunner/actions/workflows/build.yml/badge.svg)](https://github.com/litenova/ChainRunner/actions/workflows/build.yml)
+[![Coverage Status](https://coveralls.io/repos/github/litenova/ChainRunner/badge.svg?branch=main)](https://coveralls.io/github/litenova/ChainRunner?branch=main)
 [![NuGet](https://img.shields.io/nuget/vpre/ChainRunner.svg)](https://www.nuget.org/packages/ChainRunner)
 
 
