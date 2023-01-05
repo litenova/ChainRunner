@@ -5,7 +5,7 @@
         <LangVersion>latest</LangVersion>
         <Authors>Mohammad Shafie-Zadeh</Authors>
         <PackageTags>chain-of-responsibilities</PackageTags>
-        <VersionPrefix>0.5.0</VersionPrefix>
+        <VersionPrefix>0.6.0</VersionPrefix>
         <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(SolutionDir)\Release-Notes.txt"))</PackageReleaseNotes>
         <PackageIcon>chain_128x128.png</PackageIcon>
         <Description>simple and innovative library to implement a chain of responsibilities</Description>
