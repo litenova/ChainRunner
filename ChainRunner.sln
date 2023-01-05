@@ -4,14 +4,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChainRunner.Extensions.Micr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChainRunner", "src\ChainRunner\ChainRunner.csproj", "{456C52CB-4367-4B71-9504-F1096E5D10A5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7EF700B1-EE63-415F-8BEA-92C00EC991E9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-items", "{7EF700B1-EE63-415F-8BEA-92C00EC991E9}"
 ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 	LICENSE = LICENSE
 	global.json = global.json
 	README.md = README.md
-	.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
-	.github\workflows\publish-packages.yml = .github\workflows\publish-packages.yml
 	Directory.Build.props = Directory.Build.props
 	Release-Notes.txt = Release-Notes.txt
 EndProjectSection
@@ -31,14 +29,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logo", "logo", "{1A0089A7-0BE3-4E0D-84E1-E6B249F788E7}"
 	ProjectSection(SolutionItems) = preProject
 		assets\logo\chain_128x128.png = assets\logo\chain_128x128.png
+		assets\logo\chain_512x512.png = assets\logo\chain_512x512.png
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{73110182-D695-4AD9-9366-CBDA2DF597AD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{D254CA47-786C-41EF-885A-FC1660DC3ED6}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\build.yml = .github\workflows\build.yml
-		.github\workflows\publish.yml = .github\workflows\publish.yml
+		.github\workflows\build-and-test.yml = .github\workflows\build-and-test.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
 	EndProjectSection
 EndProject
 Global

@@ -1,12 +1,33 @@
-# ChainRunner
-[![Build](https://github.com/litenova/ChainRunner/actions/workflows/build.yml/badge.svg)](https://github.com/litenova/ChainRunner/actions/workflows/build.yml)
-[![Coverage Status](https://coveralls.io/repos/github/litenova/ChainRunner/badge.svg?branch=main)](https://coveralls.io/github/litenova/ChainRunner?branch=main)
-[![NuGet](https://img.shields.io/nuget/vpre/ChainRunner.svg)](https://www.nuget.org/packages/ChainRunner)
+<h1 align="center">
+  <br>
+  <a href="https://github.com/litenova/ChainRunner">
+    <img src="assets/logo/chain_128x128.png">
+  </a>
+  <br>
+  ChainRunner
+  <br>
+</h1>
+
+<h4 align="center">
+    A simple and innovative library to implement chain of responsibilities. To learn more about chain of responsibilities pattern, read the following article https://refactoring.guru/design-patterns/chain-of-responsibility
+</h4>
+
+<p align="center">
+
+  <a href="https://github.com/litenova/ChainRunner/actions/workflows/release.yml">
+    <img src="https://github.com/litenova/ChainRunner/actions/workflows/release.yml/badge.svg" alt="CI/CD Badge">
+  </a>
+
+   <a href='https://coveralls.io/github/litenova/ChainRunner?branch=main'>
+    <img src='https://coveralls.io/repos/github/litenova/ChainRunner/badge.svg?branch=main' alt='Coverage Status' />
+  </a>
+  <a href="https://www.nuget.org/packages/ChainRunner">
+    <img src="https://img.shields.io/nuget/vpre/ChainRunner.svg" alt="ChainRunner Nuget Version">
+  </a>
+</p>
 
 
-A simple and innovative library to implement chain of responsibilities. To learn more about chain of responsibilities pattern, read the following article https://refactoring.guru/design-patterns/chain-of-responsibility
-
-* Written in .NET 5
+* Written in .NET 7
 * No Dependencies
 * No Reflection
 * Easy to Use
